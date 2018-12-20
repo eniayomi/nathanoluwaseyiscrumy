@@ -6,7 +6,6 @@ from django.contrib.auth.models import User
 class ScrumyUser(models.Model):
 	user = models.OneToOneField(User, on_delete=models.CASCADE)
 	nickname = models.CharField(max_length=50)
-	age = models.IntegerField(default=0)
 
 	def _str_(self):
 		return self.nickname

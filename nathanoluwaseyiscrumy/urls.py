@@ -2,12 +2,12 @@ from django.urls import path, include
 from django.conf.urls import url, include
 from . import views
 from rest_framework.routers import DefaultRouter
+from rest_framework_jwt.views import obtain_jwt_token
 
 app_name = "nathanoluwaseyiscrumy"
 
 def_router = DefaultRouter()
-def_router.register('users', views.UserViewSet)
-def_router.register('scumyusers', views.ScrumyUserViewSet)
+def_router.register('scrumyusers', views.ScrumyUserViewSet)
 def_router.register('goalstatus', views.GoalStatusViewSet)
 
 urlpatterns = [
@@ -19,5 +19,6 @@ urlpatterns = [
 	path('add-goal/', views.add_goal, name="add_goal"),
 	path('remove-goal/<int:goal_id>/', views.remove_goal, name="remove_goal"),
 	path('move-goal/<int:goal_id>/<int:to_id>/', views.move_goal, name="move_goal"),
-	url(r'api/', include(def_router.urls))
+	url(r'api/', include(def_router.urls)),
+	url(r'^api-token-auth/', obtain_jwt_token),
 ]
